@@ -28,6 +28,17 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
+function getColor(c: string) {
+  switch (c) {
+    case "c":
+      return "green";
+    case "o":
+      return "orange";
+    case "n":
+      return "red";
+  }
+}
+
 export default function Content() {
   const [value, setValue] = useState("showAll");
   const [modalOpen, setModalOpen] = useState(false);
@@ -80,11 +91,21 @@ export default function Content() {
                 >
                   <Grid container wrap="nowrap" spacing={2}>
                     <Grid item>
-                      <Avatar>{item.status.charAt(0).toUpperCase()}</Avatar>
+                      <Avatar
+                        sx={{
+                          width: 60,
+                          height: 60,
+                          bgcolor: `${getColor(item.status.charAt(0))}`,
+                        }}
+                      >
+                        {item.status.charAt(0).toUpperCase()}
+                      </Avatar>
                     </Grid>
                     <Grid item xs zeroMinWidth>
-                      <Typography noWrap variant="h4">
-                        {item.todoName}:
+                      <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                        {item.todoName}
+                      </Typography>
+                      <Typography>
                         {item.status.charAt(0).toUpperCase() +
                           item.status.slice(1)}
                       </Typography>
