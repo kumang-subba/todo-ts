@@ -4,9 +4,7 @@ import {
   BottomNavigationAction,
   Box,
   Button,
-  Container,
   Grid,
-  List,
   Paper,
   Toolbar,
   Typography,
@@ -57,20 +55,13 @@ export default function Content() {
         flexGrow: 1,
         height: "100vh",
         overflow: "auto",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <Toolbar />
-      <Container
-        maxWidth="lg"
-        sx={{
-          mt: 4,
-          mb: 4,
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          flexDirection: "column",
-        }}
-      >
+
+      <Box flexGrow={1} mt={2} ml={2}>
         {todo[selectedList] &&
           todo[selectedList].items
             .filter((i) => {
@@ -85,7 +76,6 @@ export default function Content() {
                 <StyledPaper
                   sx={{
                     my: 1,
-                    mx: "auto",
                     p: 2,
                   }}
                 >
@@ -118,41 +108,37 @@ export default function Content() {
         <Button onClick={handleOpen} variant="contained">
           Add todo
         </Button>
-
-        <Paper
-          sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-          elevation={3}
+      </Box>
+      <Paper elevation={3}>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue: string) => {
+            setValue(newValue);
+          }}
         >
-          <BottomNavigation
-            showLabels
-            value={value}
-            onChange={(event, newValue: string) => {
-              setValue(newValue);
-            }}
-          >
-            <BottomNavigationAction
-              label="Show All"
-              value="showAll"
-              icon={<FolderIcon />}
-            />
-            <BottomNavigationAction
-              label="Completed"
-              value="completed"
-              icon={<DoneIcon />}
-            />
-            <BottomNavigationAction
-              label="On Going"
-              value="onGoing"
-              icon={<PendingIcon />}
-            />
-            <BottomNavigationAction
-              label="Not Started"
-              value="notStarted"
-              icon={<NotStartedIcon />}
-            />
-          </BottomNavigation>
-        </Paper>
-      </Container>
+          <BottomNavigationAction
+            label="Show All"
+            value="showAll"
+            icon={<FolderIcon />}
+          />
+          <BottomNavigationAction
+            label="Completed"
+            value="completed"
+            icon={<DoneIcon />}
+          />
+          <BottomNavigationAction
+            label="On Going"
+            value="onGoing"
+            icon={<PendingIcon />}
+          />
+          <BottomNavigationAction
+            label="Not Started"
+            value="notStarted"
+            icon={<NotStartedIcon />}
+          />
+        </BottomNavigation>
+      </Paper>
     </Box>
   );
 }

@@ -4,14 +4,27 @@ import React from "react";
 import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
 import { useTodoContext } from "../context/TodoContext";
 
-export default function ListOfTodo() {
+type ListOfTodoProps = {
+  open: boolean;
+};
+export default function ListOfTodo({ open }: ListOfTodoProps) {
   const { todo, addTodoList, selectTodo } = useTodoContext();
   return (
     <React.Fragment>
       {todo &&
         todo.map((list, index) => {
           return (
-            <ListItemButton key={list.id} onClick={() => selectTodo(index)}>
+            <ListItemButton
+              key={list.id}
+              onClick={() => selectTodo(index)}
+              selected
+              sx={{
+                display: "flex",
+                ...(!open && {
+                  flexDirection: "column",
+                }),
+              }}
+            >
               <ListItemIcon>
                 <FeaturedPlayListIcon />
               </ListItemIcon>

@@ -27,7 +27,7 @@ const Drawer = styled(MuiDrawer, {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      width: theme.spacing(7),
+      width: theme.spacing(6),
       [theme.breakpoints.up("sm")]: {
         width: theme.spacing(9),
       },
@@ -57,7 +57,7 @@ export default function SideBar({ open, toggleDrawer }: SideBarProps) {
         </Toolbar>
         <Divider />
         <List component="div">
-          <ListOfTodo />
+          <ListOfTodo open={open} />
         </List>
       </Drawer>
     </React.Fragment>
